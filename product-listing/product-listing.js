@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Navigation links
     const navLinks = [
-        { href: 'index.html', text: 'HOME' },
-        { href: 'index.html', text: 'SERVICES' },
-        { href: 'index.html', text: 'ABOUT' },
-        { href: '../category/category.html', text: 'CATEGORY' },
-        { href: 'index.html', text: 'CONTACT' }
+      { href: "../index.html", text: "HOME" },
+      { href: "../index.html", text: "SERVICES" },
+      { href: "../index.html", text: "ABOUT" },
+      { href: "../category/category.html", text: "CATEGORY" },
+      { href: "../index.html", text: "CONTACT" },
     ];
 
 

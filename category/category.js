@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Navigation links
     const navLinks = [
-        { href: '#home-section', text: 'HOME' },
-        { href: '#services-section', text: 'SERVICES' },
-        { href: '#about-section', text: 'ABOUT' },
-        { href: '../product-listing/product-listing.html', text: 'SHOP' },
-        { href: '#contact-section', text: 'CONTACT' }
+      { href: "../index.html", text: "HOME" },
+      { href: "../index.html", text: "SERVICES" },
+      { href: "../index.html", text: "ABOUT" },
+      { href: "../product-listing/product-listing.html", text: "SHOP" },
+      { href: "../index.html", text: "CONTACT" },
     ];
 
 

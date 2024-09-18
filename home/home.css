@@ -1293,3 +1293,60 @@ footer p {
     /* padding: 8px; */
     border: 1px solid black;
 }
+
+
+/* General Styles */
+
+.header,
+.navbar,
+.dropdown-content,
+.footer-copyright {
+    /* Existing styles */
+}
+
+
+/* Mobile View Styles */
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar ul {
+        display: none;
+        /* Hide menu items by default */
+        flex-direction: column;
+        width: 100%;
+    }
+    .navbar .dropdown-content {
+        display: none;
+        /* Hide dropdown by default */
+    }
+    .navbar .dropbtn {
+        display: block;
+        /* Show dropdown toggle button */
+    }
+    .navbar .show {
+        display: flex;
+        /* Show dropdown when active */
+    }
+    .footer-copyright {
+        text-align: center;
+    }
+}
+
+
+/* Slider Styles */
+
+#cart-slider {
+    width: 0;
+    transition: width 0.3s;
+}
+
+#cart-slider.open {
+    width: 270px;
+}
+
+#shopping-cartImg {
+    cursor: pointer;
+}
