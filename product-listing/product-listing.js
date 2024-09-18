@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Navigation links
     const navLinks = [
-      { href: "../index.html", text: "HOME" },
-      { href: "../index.html", text: "SERVICES" },
-      { href: "../index.html", text: "ABOUT" },
-      { href: "../category/category.html", text: "CATEGORY" },
-      { href: "../index.html", text: "CONTACT" },
+        { href: "../index.html", text: "HOME" },
+        { href: "../index.html", text: "SERVICES" },
+        { href: "../index.html", text: "ABOUT" },
+        { href: "../category/category.html", text: "CATEGORY" },
+        { href: "../index.html", text: "CONTACT" },
     ];
 
 
@@ -164,16 +164,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-//products fetching
 document.addEventListener("DOMContentLoaded", async() => {
     const productGrid = document.getElementById("productGrid");
     const pagination = document.getElementById("pagination");
 
     let currentPage = 1;
     const productsPerPage = 12;
-    const totalProducts = 194; // Total number of products from API
+    let totalProducts = 194; // Default value; update after fetching if needed
     const maxPageButtons = 5; // Number of pagination buttons to show
 
     // Function to fetch products from API
@@ -181,15 +178,16 @@ document.addEventListener("DOMContentLoaded", async() => {
         try {
             const res = await fetch(`https://dummyjson.com/products?limit=${productsPerPage}&skip=${(page - 1) * productsPerPage}`);
             const data = await res.json();
+            totalProducts = data.total; // Update totalProducts with actual value from API
             return data.products || [];
         } catch (error) {
             console.error("Error fetching products:", error);
             return [];
         }
     }
+
     // Function to render products to the page
     function renderProducts(products) {
-        const productGrid = document.getElementById('productGrid');
         productGrid.innerHTML = ''; // Clear previous products
 
         products.forEach(product => {
@@ -205,23 +203,22 @@ document.addEventListener("DOMContentLoaded", async() => {
 
             // Create star elements
             const starsHTML = `
-            ${'<span class="star full">&#9733;</span>'.repeat(fullStars)}
-            ${halfStar ? '<span class="star half">&#9733;</span>' : ''}
-            ${'<span class="star empty">&#9734;</span>'.repeat(emptyStars)}
-        `;
+                ${'<span class="star full">&#9733;</span>'.repeat(fullStars)}
+                ${halfStar ? '<span class="star half">&#9733;</span>' : ''}
+                ${'<span class="star empty">&#9734;</span>'.repeat(emptyStars)}
+            `;
 
             // Append product details including description
             productCard.innerHTML = `
-            <img src="${product.thumbnail || 'default-thumbnail.png'}" alt="${product.title || 'Product Image'}">
-            <h3>${product.title || 'Product Title'}</h3>
-             <p class="description">${product.description || 'No description available'}</p> 
-            <p class="price">$${product.price || 'N/A'}</p>
-            <div class="rating">
-                ${starsHTML} (${rating.toFixed(1) || 'No rating available'})
-            </div>
-           
-            <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-        `;
+                <img src="${product.thumbnail || 'default-thumbnail.png'}" alt="${product.title || 'Product Image'}">
+                <h3>${product.title || 'Product Title'}</h3>
+                <p class="description">${product.description || 'No description available'}</p>
+                <p class="price">$${product.price || 'N/A'}</p>
+                <div class="rating">
+                    ${starsHTML} (${rating.toFixed(1) || 'No rating available'})
+                </div>
+                <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+            `;
 
             productGrid.appendChild(productCard);
 
@@ -229,51 +226,11 @@ document.addEventListener("DOMContentLoaded", async() => {
             productCard.addEventListener('click', () => {
                 window.location.href = `../product/product.html?id=${product.id}`;
             });
-        });
 
-        // Add event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
+            // Add event listener for "Add to Cart" button
+            productCard.querySelector('.add-to-cart-btn').addEventListener('click', (event) => {
                 event.stopPropagation(); // Prevent click from bubbling to productCard
-                const productId = event.target.dataset.id;
-                addToCart(productId);
-            });
-
-            // Add event listener for product click
-            productCard.addEventListener('click', () => {
-                window.location.href = `../product/product.html?id=${product.id}`;
-            });
-        });
-
-        // Add event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent click from bubbling to productCard
-                const productId = event.target.dataset.id;
-                addToCart(productId);
-            });
-        });
-
-
-        // Add event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent click from bubbling to productCard
-                const productId = event.target.dataset.id;
-                addToCart(productId);
-            });
-        });
-
-
-
-
-
-
-        // Add event listeners to "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const productId = event.target.dataset.id;
-                addToCart(productId);
+                addToCart(product.id);
             });
         });
     }
@@ -350,7 +307,6 @@ document.addEventListener("DOMContentLoaded", async() => {
     // Load initial products
     loadProducts();
 });
-
 
 
 
