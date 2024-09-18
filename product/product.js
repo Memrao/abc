@@ -365,6 +365,7 @@ function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartSidebar();
+    updateCartCount(); // Update the cart count display
 }
 
 // Function to change the quantity of a product in the cart

@@ -654,6 +654,38 @@
             /* Ensure it is above footer */
         }
         
+        .cart-item-image {
+            width: 50px;
+            /* Default width for larger screens */
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: cover;
+            /* Ensure images cover the area without distortion */
+            transition: width 0.3s ease;
+            /* Smooth transition when resizing */
+        }
+        /* Responsive styles */
+        
+        @media (max-width: 768px) {
+            .cart-item-image {
+                width: 40px;
+                /* Adjust width for tablets and small screens */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cart-item-image {
+                width: 30px;
+                /* Adjust width for mobile devices */
+            }
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: auto;
+            object-fit: cover;
+        }
+        
         .cart-sidebar.open {
             right: 0;
         }
@@ -661,6 +693,47 @@
         #close-sidebar {
             margin: 10px;
             cursor: pointer;
+        }
+        /* Responsive Styles for Mobile */
+        
+        @media (max-width: 768px) {
+            .cart-icon {
+                font-size: 20px;
+                top: 10px;
+                right: 10px;
+            }
+            .cart-badge {
+                padding: 3px;
+                font-size: 10px;
+            }
+            .cart-sidebar {
+                width: 80%;
+                /* Reduce width for mobile devices */
+            }
+            #close-sidebar {
+                margin: 5px;
+                /* Adjust margin for mobile view */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cart-icon {
+                font-size: 18px;
+                top: 5px;
+                right: 5px;
+            }
+            .cart-badge {
+                padding: 2px;
+                font-size: 8px;
+            }
+            .cart-sidebar {
+                width: 90%;
+                /* Further reduce width for smaller mobile devices */
+            }
+            #close-sidebar {
+                margin: 3px;
+                /* Adjust margin for very small screens */
+            }
         }
         /* Footer Styles */
         
