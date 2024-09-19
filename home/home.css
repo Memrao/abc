@@ -31,7 +31,7 @@ a:hover {
     cursor: pointer;
     font-size: 1.125rem;
     /* 18px equivalent */
-    padding: 9.625rem;
+    padding-left: 10.625rem;
     /* 10px equivalent */
     position: relative;
     left: 10px;
@@ -76,7 +76,7 @@ ul li {
 }
 
 .logo img {
-    width: 9rem;
+    /* width: 9rem; */
 }
 
 

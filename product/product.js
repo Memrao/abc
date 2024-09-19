@@ -301,7 +301,7 @@ function addToCart(product) {
     }
 
     // Update cart count
-    cartCountElement.innerText = cart.reduce((total, item) => total + item.quantity, 0);
+    updateCartCount();
 
     // Store updated cart in localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -338,6 +338,11 @@ function updateCartSidebar() {
     });
 
     // Add event listeners for remove and quantity buttons
+    attachEventListeners();
+}
+
+// Function to attach event listeners to remove, increase, and decrease buttons
+function attachEventListeners() {
     document.querySelectorAll('.remove-item').forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = e.target.getAttribute('data-id');
@@ -382,6 +387,11 @@ function changeQuantity(productId, delta) {
     }
 }
 
+// Function to update the cart count display
+function updateCartCount() {
+    cartCountElement.innerText = cart.reduce((total, item) => total + item.quantity, 0);
+}
+
 // Open the cart sidebar
 function openCartSidebar() {
     cartSidebar.classList.add('open');
@@ -424,37 +434,12 @@ function showPopup(message) {
     }, 3000); // Hide popup after 3 seconds
 }
 
-// Function to update the cart with items from an external API (Optional)
-async function updateCart() {
-    try {
-        const response = await fetch('https://dummyjson.com/carts/1');
-        const fetchedCart = await response.json();
-
-        if (fetchedCart && fetchedCart.products) {
-            fetchedCart.products.forEach(fetchedProduct => {
-                const localProduct = cart.find(item => item.id === fetchedProduct.id);
-                if (localProduct) {
-                    localProduct.quantity += fetchedProduct.quantity;
-                } else {
-                    cart.push(fetchedProduct);
-                }
-            });
-
-            // Store merged cart in localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartSidebar(); // Update the sidebar with merged cart data
-        }
-    } catch (error) {
-        console.error('Failed to update cart:', error);
-    }
-}
-
 // Load cart from localStorage on page load
 window.addEventListener('load', () => {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
         cart = JSON.parse(storedCart);
-        cartCountElement.innerText = cart.reduce((total, item) => total + item.quantity, 0);
+        updateCartCount();
         updateCartSidebar();
     }
 });
